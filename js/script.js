@@ -1,3 +1,5 @@
+let turn = 2;
+
 function createTable() {
     let div;
     let id = 0;
@@ -12,15 +14,35 @@ function createTable() {
             div.style.display = "inline-block";
             div.style.margin = "10px";
             div.style.borderRadius = "100px"
-            div.setAttribute("onclick","checkPos(this.id)");
+            if (i == 0) {
+                div.setAttribute("onclick","play(this.id)");
+            }
             document.body.appendChild(div);
         }
     document.body.appendChild(document.createElement("br"));
   }
 }
 
-function checkPos(id) {
-    pos = id;
+function play(id) {
+    pos = parseInt(id) + 35;
+    let color = "";
+    if (turn % 2 == 0) {
+        color = "red";
+    } else { 
+        color = "yellow";
+    }
+    for (i = 0; i < 6; i++) {
+        if (document.getElementById(pos).style.background == "grey") {
+            document.getElementById(pos).style.background = color;
+            break;
+        }
+        pos = pos - 7;
+    }
+    turn++;
+}
+
+function checkWin() {
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {
